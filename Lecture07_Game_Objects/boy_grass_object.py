@@ -38,6 +38,8 @@ class Zombie:
     def update(self):
         self.frame = (self.frame + 1) % 10
         self.x += 5
+        if self.x > 800:
+            self.x = 0
 
     def draw(self):
         frame_width = self.image.w // 10
@@ -49,8 +51,13 @@ class Zombie:
 class Ball:
     def __init__(self):
         self.x, self.y = random.randint(0, 800), 599
-        self.image = load_image('ball21x21.png')
-        self.fall_speed = random.randint(5, 20)
+        self.size = ['small_ball', 'big_ball']
+        if random.choice(self.size) == 'small_ball':
+            self.image = load_image('ball21x21.png')
+            self.fall_speed = random.randint(10, 30)
+        else:
+            self.image = load_image('ball41x41.png')
+            self.fall_speed = random.randint(10, 30)
 
     def update(self):
         self.y -= self.fall_speed
