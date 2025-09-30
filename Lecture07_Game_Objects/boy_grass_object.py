@@ -47,13 +47,22 @@ class Zombie:
 
 
 class Ball:
-    pass
+    def __init__(self):
+        self.x, self.y = random.randint(0, 800), 599
+        self.image = load_image('ball21x21.png')
+
+    def update(self):
+        self.y -= 10
+        if self.y < 0:
+            self.y = 599
+            self.x = random.randint(0, 800)
+
+    def draw(self):
+        self.image.draw(self.x, self.y)
 
 
-
-
-
-
+open_canvas()
+def handle_events():
     global running
     events = get_events()
     for event in events:
@@ -62,7 +71,6 @@ class Ball:
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
-open_canvas()
 
 def reset_world():
     global running
@@ -76,6 +84,8 @@ def reset_world():
     world += team
     zombie = Zombie()
     world.append(zombie)
+    balls = [Ball() for _ in range(20)]
+    world += balls
 
 def update_world():
     for game_object in world:
@@ -88,6 +98,7 @@ def render_world():
     update_canvas()
 
 reset_world()
+
 while running:
     handle_events() # 사용자 입력을 받는다
     update_world() # 객체의 상호작용을 계산
