@@ -114,3 +114,4 @@ while running:
     delay(0.05)
 
 close_canvas()
+#Drill #7 제출 - 2022182020 서상혁 - 공들의 낙하 구현
